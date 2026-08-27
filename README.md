@@ -15,7 +15,7 @@ No build tools, no dependencies. Just open `index.html` in a browser.
 ## Files
 
 ```
-Sidra test/
+Agventa-by-Sidrah-/
 ├── index.html        Home — hero, two service pillars, why us, process, stats, testimonials
 ├── tech.html         Tech practice — 4 services + Revenue detail, models, FAQ
 ├── non-tech.html     Non-tech practice — 6 services, GEO/AEO explainer, models, FAQ
@@ -25,6 +25,8 @@ Sidra test/
 ├── sitemap.xml       All 5 pages, for Google Search Console
 ├── SEO-CHECKLIST.md  Full SEO guide — read this before publishing
 ├── SUBMISSIONS.md    Directory listings, NAP block + submission tracker
+├── DEPLOY.md         Cloudflare Pages + domain + email setup
+├── _headers          Cloudflare security headers & cache rules
 ├── README.md         This file
 └── assets/
     ├── style.css     All styling (CSS variables at the top)
@@ -40,8 +42,8 @@ BreadcrumbList). See **[SEO-CHECKLIST.md](SEO-CHECKLIST.md)** for the required
 pre-launch edits and — more importantly — the off-site work that actually drives
 ranking.
 
-**Do this first:** find & replace `https://www.augventa.com` with your real domain
-across all HTML files, `robots.txt` and `sitemap.xml`.
+All canonical, OG and JSON-LD URLs point at `https://augventa.com` — the live bare
+domain. Keep them in sync if the domain ever changes.
 
 ## Things to change before going live
 
@@ -71,18 +73,19 @@ across all HTML files, `robots.txt` and `sitemap.xml`.
 Both forms (the contact page and the popup on the service pages) POST to
 **FormSubmit**, which emails submissions to:
 
-- **To:** Sidrah@adventa.com
-- **Cc:** shakeelzain04@gmail.com (test inbox — remove the `_cc` hidden field when done)
+- **To:** shakeelzain04@gmail.com
 
-**Before any email arrives, FormSubmit must be activated once.** Submit the form a
-single time; FormSubmit emails a confirmation link to Sidrah@adventa.com. Click it,
-and every submission after that is delivered. Until then submissions are discarded
-silently.
+`sidrah@augventa.com` is the address displayed on the site, but the domain has no MX
+records yet so it cannot receive mail. Delivery points at the Gmail address until
+Cloudflare Email Routing is configured — see **[DEPLOY.md](DEPLOY.md)**.
+
+**FormSubmit must be activated once before any email arrives.** Submit the form a
+single time; FormSubmit emails a confirmation link to the delivery address. Click it,
+and every submission after that is delivered. Until then they're discarded silently.
 
 **Testing locally won't work.** Opening `index.html` from your hard drive gives the
-page a `file://` origin, which browsers block from making cross-site requests. Host
-it first — drag the folder onto [netlify.com/drop](https://app.netlify.com/drop) and
-test on the URL it gives you.
+page a `file://` origin, which browsers block from making cross-site requests. Test on
+the live site instead: <https://augventa.com/contact.html>
 
 To change the destination address, edit the `action` attribute on both forms —
 `contact.html`, `tech.html`, `non-tech.html`. The JavaScript reads the address from
@@ -93,7 +96,7 @@ the submit handler falls back to a normal form POST for any non-FormSubmit actio
 
 ## Alternative: other form providers
 
-The form validates in the browser but does not submit anywhere. Easiest fix — use
+To swap provider, change the `action` attribute. For example, with
 [Formspree](https://formspree.io): create a form, then in `contact.html` change
 
 ```html
@@ -106,11 +109,11 @@ to
 <form id="contactForm" action="https://formspree.io/f/YOUR_ID" method="POST" novalidate>
 ```
 
-and in `assets/script.js` replace the success block (section 4) with `form.submit();`.
-
-Netlify Forms works too — just add `netlify` to the `<form>` tag and deploy to Netlify.
+The submit handler falls back to a plain form POST for any non-FormSubmit action, so
+no JavaScript changes are needed.
 
 ## Publishing
 
-Drag the whole folder onto [netlify.com/drop](https://app.netlify.com/drop) — it's live
-in seconds. GitHub Pages, Vercel, or any shared host with FTP will work equally well.
+Live at <https://augventa.com> via Cloudflare Pages, deployed from the `main` branch of
+<https://github.com/ZainShakeel/Agventa-by-Sidrah->. Every `git push` redeploys
+automatically. Setup and troubleshooting: **[DEPLOY.md](DEPLOY.md)**.

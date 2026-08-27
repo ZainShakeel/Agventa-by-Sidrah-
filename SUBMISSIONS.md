@@ -27,8 +27,8 @@ Region/State:    Punjab
 Postal code:     54660
 Country:         Pakistan
 Phone:           +92 332 4322045
-Email:           Sidrah@adventa.com
-Website:         https://www.augventa.com
+Email:           sidrah@augventa.com
+Website:         https://augventa.com
 Category:        Business Management Consultant
 Secondary cats:  Software Company, Marketing Agency, Employment Agency,
                  Website Designer, Advertising Agency

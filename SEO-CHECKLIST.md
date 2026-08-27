@@ -40,7 +40,7 @@ where the actual ranking gets won.
 
 ## Before you publish — 6 required edits
 
-1. **Find & replace the domain.** `https://www.augventa.com` appears in all 5
+1. **Find & replace the domain.** `https://augventa.com` appears in all 5
    HTML files, `robots.txt` and `sitemap.xml`. Replace with your real domain.
 2. **Real contact details.** Phone, email and address — in the footers, in
    `contact.html`, and in the JSON-LD block in `index.html`. These must match your

@@ -47,12 +47,14 @@ Now that the site is on a real HTTPS domain, the form will work (it can't work f
 your Desktop — browsers block cross-site requests from `file://` pages).
 
 1. Submit the contact form once.
-2. **FormSubmit sends a one-time activation link to Sidrah@adventa.com.** Open that
-   email and click the link.
-3. Submit again. This one should arrive at Sidrah@adventa.com, cc'd to
-   shakeelzain04@gmail.com.
+2. **FormSubmit emails a one-time activation link to shakeelzain04@gmail.com.**
+   Open it and click the link.
+3. Submit again. This one lands in shakeelzain04@gmail.com.
 
-Until that activation link is clicked, submissions are silently discarded. If your
+Delivery points at that Gmail address because `sidrah@augventa.com` has no mailbox
+behind it yet — see **Set up email on the domain** below.
+
+Until the activation link is clicked, submissions are silently discarded. If your
 test produces nothing, this is almost always why.
 
 ---
@@ -104,29 +106,47 @@ Once Cloudflare says the domain is **Active**:
 1. **Workers & Pages** → your `augventa` project → **Custom domains** tab.
 2. **Set up a custom domain** → enter `augventa.com` → Cloudflare creates the DNS
    record for you.
-3. Repeat for `www.augventa.com`.
+3. Repeat for `www.augventa.com` so both resolve.
 4. SSL certificates issue automatically — usually a few minutes, occasionally up to
    an hour. The padlock appears when it's done.
 
 ---
 
-## Stage 4 — Pick one canonical domain
+## Stage 4 — Canonical domain (done) and the www fix
 
-Decide whether your real address is `augventa.com` or `www.augventa.com`, then make
-everything agree. Splitting between both divides your SEO signals across two
-addresses and Google treats them as separate sites.
+The site is live on the **bare domain** `https://augventa.com`, and every canonical,
+OG and JSON-LD URL in the repo now points there. No further code changes needed.
 
-**Recommended:** bare domain (`augventa.com`) as primary, `www` redirecting to it.
+⚠️ **`www.augventa.com` currently returns a 522 error.** A DNS record for `www`
+exists but isn't attached to the Pages project, so anyone typing "www" hits a broken
+page. Fix it one of two ways:
 
-To set the redirect: Cloudflare dashboard → your domain → **Rules** → **Redirect
-Rules** → create a rule sending `www.augventa.com/*` to `https://augventa.com/$1`
-with a **301 (permanent)** status.
+**Option A (recommended)** — Workers & Pages → your project → **Custom domains** →
+add `www.augventa.com`. Then your domain → **Rules → Redirect Rules** → send
+`www.augventa.com/*` to `https://augventa.com/$1` with a **301 (permanent)**.
 
-Then make the site's own tags match — every page has a `<link rel="canonical">` and
-OG/Twitter URLs currently set to `https://www.augventa.com`. If you go with the bare
-domain, all of them need the `www.` removed, along with `robots.txt` and
-`sitemap.xml`. It's a single find-and-replace across the repo — ask and I'll do it in
-one pass.
+**Option B** — your domain → **DNS** → delete the `www` record, so www simply
+doesn't resolve rather than erroring.
+
+---
+
+## Set up email on the domain
+
+`augventa.com` has **no MX records**, so `sidrah@augventa.com` cannot receive mail.
+Free fix, and the domain is already on Cloudflare:
+
+1. Cloudflare dashboard → your domain → **Email** → **Email Routing** → enable.
+2. Cloudflare adds the MX and SPF records automatically.
+3. Create a custom address: `sidrah@augventa.com` → forward to Sidrah's real inbox.
+4. Cloudflare sends that inbox a verification link. It must be clicked.
+
+Then switch form delivery back: change the `action` on all three forms to
+`https://formsubmit.co/sidrah@augventa.com`, add the `_cc` hidden field back for the
+test inbox, push, and redo the FormSubmit activation once.
+
+Note: Email Routing **forwards** incoming mail; it does not let you *send* as
+sidrah@augventa.com. For that you need Google Workspace or Zoho Mail (Zoho has a free
+tier for a single domain).
 
 ---
 

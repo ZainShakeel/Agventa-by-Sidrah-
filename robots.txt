@@ -1,5 +1,5 @@
 # robots.txt — Augventa
-# Replace www.augventa.com with your real domain before going live.
+# Replace augventa.com with your real domain before going live.
 
 User-agent: *
 Allow: /
@@ -8,4 +8,4 @@ Allow: /
 # folders you don't want indexed, list them here like:
 # Disallow: /admin/
 
-Sitemap: https://www.augventa.com/sitemap.xml
+Sitemap: https://augventa.com/sitemap.xml

@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
         form.reset();
       })
       .catch(function () {
-        say('⚠️ Sorry, that didn’t send. Please email us directly at Sidrah@adventa.com or call +92 332 4322045.', true);
+        say('⚠️ Sorry, that didn’t send. Please email us directly at sidrah@augventa.com or call +92 332 4322045.', true);
       })
       .finally(function () {
         if (btn) { btn.disabled = false; btn.textContent = btnDefault; }
