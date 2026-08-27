@@ -1,0 +1,14 @@
+# Cloudflare Pages reads this file automatically.
+# Left column = URL pattern, indented lines = headers to send.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
+
+# Assets are cached for an hour and then revalidated. Deliberately modest:
+# the filenames aren't content-hashed, so a long cache would leave visitors
+# on a stale stylesheet after you push a change.
+/assets/*
+  Cache-Control: public, max-age=3600, must-revalidate
