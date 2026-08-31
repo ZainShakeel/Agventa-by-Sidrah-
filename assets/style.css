@@ -184,7 +184,6 @@ strong { color: var(--ink-2); font-weight: 600; }
   transition: color .18s;
 }
 .nav-links > li > a:hover { color: var(--brand); }
-.nav-links > li > a .caret { width: 9px; height: 9px; opacity: .65; transition: transform .2s; }
 .nav-links > li > a.on {
   color: var(--brand);
   font-weight: 500;
@@ -193,37 +192,6 @@ strong { color: var(--ink-2); font-weight: 600; }
   content: ''; position: absolute; left: 0; right: 0; bottom: -2px;
   height: 2px; background: var(--brand); border-radius: 2px;
 }
-
-/* Dropdowns */
-.has-drop:hover > a .caret { transform: rotate(180deg); }
-.drop {
-  position: absolute; top: calc(100% + 14px); left: 50%;
-  transform: translateX(-50%) translateY(8px);
-  min-width: 240px;
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  box-shadow: var(--sh-lg);
-  padding: .55rem;
-  opacity: 0; visibility: hidden; pointer-events: none;
-  transition: opacity .2s ease, transform .2s ease, visibility .2s;
-}
-.drop::before { content: ''; position: absolute; top: -14px; left: 0; right: 0; height: 14px; }
-.has-drop:hover .drop, .has-drop:focus-within .drop {
-  opacity: 1; visibility: visible; pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
-}
-.drop .grp {
-  font-size: .66rem; letter-spacing: .16em; text-transform: uppercase;
-  color: var(--muted); font-weight: 600; padding: .6rem .8rem .25rem;
-}
-.drop a {
-  display: block; padding: .5rem .8rem; border-radius: var(--r-sm);
-  font-size: .85rem; color: var(--ink-2);
-  transition: background .16s, color .16s;
-}
-.drop a:hover { background: var(--brand-tint); color: var(--brand); }
-.drop.wide { min-width: 460px; display: grid; grid-template-columns: 1fr 1fr; gap: 0 .4rem; }
 
 .nav-right { display: flex; align-items: center; gap: .8rem; }
 
@@ -817,16 +785,6 @@ body.modal-open { overflow: hidden; }
   .nav-links.open { display: flex; }
   .nav-links > li > a { padding: .85rem 0; border-bottom: 1px solid var(--line-2); justify-content: space-between; }
   .nav-links > li > a.on::after { display: none; }
-  .drop {
-    position: static; transform: none; opacity: 1; visibility: visible; pointer-events: auto;
-    box-shadow: none; border: 0; border-bottom: 1px solid var(--line-2);
-    border-radius: 0; padding: .2rem 0 .8rem .8rem; min-width: 0;
-    display: none;
-  }
-  .drop, .drop.wide { min-width: 0; }
-  .drop.wide { grid-template-columns: 1fr; }
-  .has-drop.open .drop { display: block; }
-  .has-drop.open .drop.wide { display: grid; }
   .nav-right .btn { display: none; }
 
   .hero { padding: 2.4rem 0 3.5rem; }

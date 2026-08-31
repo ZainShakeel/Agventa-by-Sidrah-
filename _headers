@@ -15,8 +15,8 @@
 #
 # So style.css and script.js are linked with a version query string:
 #
-#     <link rel="stylesheet" href="assets/style.css?v=20260831">
-#     <script src="assets/script.js?v=20260831"></script>
+#     <link rel="stylesheet" href="assets/style.css?v=20260831b">
+#     <script src="assets/script.js?v=20260831b"></script>
 #
 # A different query string is a different cache key, so a new version is
 # fetched immediately instead of waiting for a cache to expire.
@@ -24,7 +24,7 @@
 # WHENEVER YOU EDIT style.css OR script.js, bump that date in all five HTML
 # files (index, tech, non-tech, about, contact) in the same commit:
 #
-#     sed -i 's/?v=20260831/?v=YYYYMMDD/g' *.html
+#     sed -i 's/?v=20260831b/?v=YYYYMMDD/g' *.html
 #
 # Skip it and your change may not reach visitors for hours.
 /assets/*

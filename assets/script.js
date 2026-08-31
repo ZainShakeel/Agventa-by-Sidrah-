@@ -1,7 +1,7 @@
 /* ============================================================
    AUGVENTA — Site scripts
     1. Sticky-header shadow
-    2. Mobile navigation + dropdowns
+    2. Mobile navigation
     3. Reveal-on-scroll
     4. Tech / Non-Tech service toggle
     5. Animated stat counters
@@ -28,9 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  /* ---------- 2. Mobile navigation + dropdowns ----------
-     On desktop the dropdowns open on hover (CSS only). Below 980px the
-     parent link becomes an accordion toggle instead of a link. */
+  /* ---------- 2. Mobile navigation ---------- */
   var burger = document.getElementById('burger');
   var links  = document.getElementById('navLinks');
 
@@ -43,25 +41,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     links.querySelectorAll('a').forEach(function (a) {
       a.addEventListener('click', function () {
-        // Don't close the menu when the tap only opened a sub-menu
-        if (a.parentElement.classList.contains('has-drop') && window.innerWidth <= 980) return;
         links.classList.remove('open');
         burger.classList.remove('open');
         burger.setAttribute('aria-expanded', 'false');
       });
     });
   }
-
-  document.querySelectorAll('.has-drop > a').forEach(function (a) {
-    a.addEventListener('click', function (e) {
-      if (window.innerWidth > 980) return;      // desktop keeps hover behaviour
-      e.preventDefault();
-      var li = a.parentElement;
-      var wasOpen = li.classList.contains('open');
-      document.querySelectorAll('.has-drop.open').forEach(function (o) { o.classList.remove('open'); });
-      li.classList.toggle('open', !wasOpen);
-    });
-  });
 
   /* ---------- 3. Reveal on scroll ---------- */
   var items = document.querySelectorAll('.reveal');
