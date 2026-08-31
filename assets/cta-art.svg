@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 200" role="presentation" aria-hidden="true">
+  <defs>
+    <symbol id="gO" viewBox="0 0 40 40">
+      <polygon points="20,0 40,10 20,20 0,10"   fill="#ffb066"/>
+      <polygon points="0,10 20,20 20,40 0,30"   fill="#e85f00"/>
+      <polygon points="40,10 40,30 20,40 20,20" fill="#ff7a14"/>
+    </symbol>
+    <symbol id="gD" viewBox="0 0 40 40">
+      <polygon points="20,0 40,10 20,20 0,10"   fill="#2a3a57"/>
+      <polygon points="0,10 20,20 20,40 0,30"   fill="#101d33"/>
+      <polygon points="40,10 40,30 20,40 20,20" fill="#1b2b47"/>
+    </symbol>
+    <radialGradient id="gGlow" cx=".5" cy=".55" r=".5">
+      <stop offset="0" stop-color="#ff8a33" stop-opacity=".6"/>
+      <stop offset="1" stop-color="#ff8a33" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="120" cy="112" rx="112" ry="92" fill="url(#gGlow)"/>
+  <use href="#gD" x="18"  y="88"  width="66" height="66"/>
+  <use href="#gO" x="66"  y="46"  width="92" height="92"/>
+  <use href="#gO" x="140" y="92"  width="60" height="60"/>
+  <use href="#gD" x="96"  y="116" width="48" height="48"/>
+  <g fill="#ffb066">
+    <rect x="184" y="52" width="10" height="10" rx="2" opacity=".85"/>
+    <rect x="204" y="34" width="7"  height="7"  rx="1.5" opacity=".55"/>
+    <rect x="30"  y="52" width="8"  height="8"  rx="2" opacity=".5"/>
+  </g>
+</svg>

@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>About Augventa | Augmenting Ventures</title>
-<meta name="description" content="Augventa is a technology and growth partner running two practices — talent, AI automation and cloud on one side; brand, pipeline and platforms on the other. Meet the team and how we work.">
+<meta name="description" content="Augventa is a technology and growth partner running two practices — talent, AI automation and cloud on one side; brand, pipeline and platforms on the other. Meet the team, the industries we serve and how we work.">
 <link rel="canonical" href="https://augventa.com/about.html">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="theme-color" content="#c2410c">
+<meta name="theme-color" content="#ff6b00">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Augventa">
@@ -22,6 +22,9 @@
 <meta name="twitter:image" content="https://augventa.com/assets/og-image.jpg">
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 
 <script type="application/ld+json">
@@ -32,7 +35,7 @@
       "@type": "AboutPage",
       "url": "https://augventa.com/about.html",
       "name": "About Augventa",
-      "description": "The story, values, process and team behind Augventa.",
+      "description": "The story, values, industries, process and team behind Augventa.",
       "mainEntity": { "@id": "https://augventa.com/#organization" }
     },
     {
@@ -48,44 +51,138 @@
 </head>
 <body>
 
-<header class="header">
+<!-- ICON SPRITE — see index.html for notes -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <g id="i-search" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="7.5"/><path d="m17 17 4.5 4.5"/>
+    </g>
+    <g id="i-idea" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M15 14c.2-1 .7-1.7 1.5-2.5A5.9 5.9 0 0 0 18 8 6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/>
+      <path d="M9 18h6M10 21.5h4"/>
+    </g>
+    <g id="i-clock" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="9.2"/><path d="M12 6.8V12l3.4 2"/>
+    </g>
+    <g id="i-unlock" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4" y="11" width="16" height="10" rx="2.5"/><path d="M8 11V7a4 4 0 0 1 7.9-.9"/>
+    </g>
+    <g id="i-heart" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 1 0-7.1 7.1L12 21l8.8-8.3a5 5 0 0 0 0-7.1z"/>
+    </g>
+    <g id="i-bed" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 18v-6.5A2.5 2.5 0 0 1 4.5 9H19a3 3 0 0 1 3 3v6"/><path d="M2 14h20M6 9V6.5A1.5 1.5 0 0 1 7.5 5h9A1.5 1.5 0 0 1 18 6.5V9"/>
+    </g>
+    <g id="i-brand" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M11.56 3.27a.5.5 0 0 1 .88 0l2.95 5.6a1 1 0 0 0 1.51.3l4.28-3.67a.5.5 0 0 1 .8.52l-2.84 10.25a1 1 0 0 1-.95.73H5.81a1 1 0 0 1-.96-.73L2.02 6.02a.5.5 0 0 1 .8-.52l4.27 3.66a1 1 0 0 0 1.52-.29z"/>
+      <path d="M5 21h14"/>
+    </g>
+    <g id="i-cloud" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+    </g>
+    <g id="i-wallet" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H18a1 1 0 0 1 1 1v2"/><rect x="3" y="7.5" width="18" height="12.5" rx="2.5"/>
+      <path d="M17 13.5h.01"/>
+    </g>
+    <g id="i-truck" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 6.5h11v10H2z"/><path d="M13 10h4l4 3.5v3h-8"/><circle cx="6.5" cy="18.5" r="2"/><circle cx="17" cy="18.5" r="2"/>
+    </g>
+    <g id="i-home" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/>
+    </g>
+    <g id="i-briefcase" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2.5" y="7" width="19" height="13" rx="2.5"/><path d="M8.5 7V5.5A2 2 0 0 1 10.5 3.5h3a2 2 0 0 1 2 2V7"/><path d="M2.5 12h19"/>
+    </g>
+    <g id="i-tech" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="5" y="5" width="14" height="14" rx="3"/><rect x="9" y="9" width="6" height="6" rx="1.5"/>
+      <path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M19.8 4.2l-2.1 2.1M6.3 17.7l-2.1 2.1"/>
+    </g>
+    <g id="i-arrow-right" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 12h15M13 5.5 19.5 12 13 18.5"/>
+    </g>
+    <g id="i-chevron-down" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m6 9 6 6 6-6"/>
+    </g>
+    <path id="i-linkedin" fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3-.02-2.96-1.8-2.96-1.8 0-2.08 1.4-2.08 2.86V21H9z"/>
+    <path id="i-x" fill="currentColor" d="M18.2 2H21l-6.5 7.4L22 22h-6l-4.7-6.1L5.9 22H3l7-8-7.3-12h6.2l4.2 5.6zM17 20h1.6L7.1 4H5.4z"/>
+    <path id="i-facebook" fill="currentColor" d="M13 22v-8h2.7l.4-3H13V9.1c0-.9.25-1.5 1.5-1.5H16V4.9c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7v3h2.8v8z"/>
+    <path id="i-instagram" fill="currentColor" d="M12 2c2.7 0 3 0 4.1.06 1.1.05 1.8.22 2.4.47.7.26 1.2.6 1.8 1.15.55.55.9 1.1 1.15 1.8.25.6.42 1.3.47 2.4C22 9 22 9.3 22 12s0 3-.06 4.1c-.05 1.1-.22 1.8-.47 2.4a4.9 4.9 0 0 1-1.15 1.8c-.55.55-1.1.9-1.8 1.15-.6.25-1.3.42-2.4.47-1.1.06-1.4.06-4.1.06s-3 0-4.1-.06c-1.1-.05-1.8-.22-2.4-.47a4.9 4.9 0 0 1-1.8-1.15 4.9 4.9 0 0 1-1.15-1.8c-.25-.6-.42-1.3-.47-2.4C2 15 2 14.7 2 12s0-3 .06-4.1c.05-1.1.22-1.8.47-2.4.26-.7.6-1.2 1.15-1.8A4.9 4.9 0 0 1 5.5 2.53c.6-.25 1.3-.42 2.4-.47C9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zM17.8 5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/>
+    <path id="i-youtube" fill="currentColor" d="M21.6 7.2s-.2-1.4-.8-2c-.75-.8-1.6-.8-2-.85C16 4.2 12 4.2 12 4.2s-4 0-6.8.2c-.4.05-1.25.05-2 .85-.6.6-.8 2-.8 2S2.2 8.8 2.2 10.5v1.6c0 1.6.2 3.3.2 3.3s.2 1.4.8 2c.75.8 1.75.77 2.2.86 1.6.15 6.8.2 6.8.2s4 0 6.8-.21c.4-.05 1.25-.05 2-.85.6-.6.8-2 .8-2s.2-1.6.2-3.3v-1.6c0-1.6-.2-3.3-.2-3.3zM9.9 14.6V8.9l5.2 2.86z"/>
+  </defs>
+</svg>
+
+<!-- ================= HEADER ================= -->
+<header class="header" id="siteHeader">
   <div class="wrap nav">
-    <a href="index.html" class="logo"><img src="assets/logo.svg" alt="" class="logo-mark"> Augventa</a>
-    <nav class="nav-links" id="navLinks">
-      <a href="index.html">Home</a>
-      <a href="tech.html">Tech</a>
-      <a href="non-tech.html">Non-Tech</a>
-      <a href="about.html" class="active">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-    <div class="nav-cta">
-      <a href="contact.html" class="btn btn-primary">Book a Consultation</a>
-      <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false">
+    <a href="index.html" class="logo"><img src="assets/logo.svg" alt="" class="logo-mark" width="34" height="34"> Augventa</a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li class="has-drop">
+        <a href="tech.html">Services <svg class="caret" viewBox="0 0 24 24"><use href="#i-chevron-down"/></svg></a>
+        <div class="drop wide">
+          <div>
+            <div class="grp">Tech</div>
+            <a href="tech.html#staff-augmentation">IT Staff Augmentation</a>
+            <a href="tech.html#ai-automation">AI Automation</a>
+            <a href="tech.html#gcp">GCP Integration</a>
+            <a href="tech.html#revenue">Revenue Services</a>
+          </div>
+          <div>
+            <div class="grp">Non-Tech</div>
+            <a href="non-tech.html#partnerships">B2B Partnerships / Lead Gen</a>
+            <a href="non-tech.html#branding">Branding</a>
+            <a href="non-tech.html#paid-ads">Paid Ads</a>
+            <a href="non-tech.html#web">Website Development</a>
+            <a href="non-tech.html#geo-seo">GEO / AEO / SEO</a>
+            <a href="non-tech.html#app">App Development</a>
+          </div>
+        </div>
+      </li>
+      <li><a href="#industries">Industries</a></li>
+      <li><a href="about.html" class="on">About Us</a></li>
+      <li><a href="index.html#case-studies">Case Studies</a></li>
+      <li class="has-drop">
+        <a href="index.html#faqs">Resources <svg class="caret" viewBox="0 0 24 24"><use href="#i-chevron-down"/></svg></a>
+        <div class="drop">
+          <a href="index.html#faqs">FAQs</a>
+          <a href="index.html#case-studies">Case Studies</a>
+          <a href="#process">How We Work</a>
+          <a href="contact.html">Talk to an Expert</a>
+        </div>
+      </li>
+    </ul>
+
+    <div class="nav-right">
+      <a href="contact.html" class="btn btn-primary btn-sm">Book a Consultation <svg class="ico" viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></a>
+      <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </header>
 
+<!-- ================= PAGE HEAD ================= -->
 <section class="page-head">
   <div class="wrap">
-    <div class="crumb"><a href="index.html">Home</a> / About</div>
+    <div class="crumb"><a href="index.html">Home</a> / About Us</div>
     <span class="eyebrow">About us</span>
-    <h1>We augment ventures — we don't replace them</h1>
+    <h1>We <span class="orange">augment</span> ventures —<br>we don't replace them</h1>
     <p>
       The name is the model. Augventa exists to add the capability a growing company is
       missing — engineers, automation, pipeline, brand — and to hand it over working, in your
       name, with your team able to run it.
     </p>
+    <a href="contact.html" class="btn btn-primary">Book a Consultation <svg class="ico" viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></a>
   </div>
 </section>
 
 <!-- ================= STORY ================= -->
-<section class="section">
+<section class="sec">
   <div class="wrap split reveal">
     <div>
       <span class="eyebrow">Our story</span>
-      <h2>Two practices, because growth stalls in two different places</h2>
+      <h2>Two practices, because growth stalls in <span class="orange">two different places</span></h2>
       <p>
         Every venture we met was stuck on one of two things. Either they couldn't build fast
         enough — hiring took months, ops ran on spreadsheets, the cloud migration kept slipping.
@@ -97,43 +194,44 @@
         builds the partnerships, brand, campaigns and platforms that bring customers in. One
         contract, one point of contact, either or both.
       </p>
-      <a href="contact.html" class="btn btn-primary" style="margin-top:1.8rem;">Work with us</a>
+      <a href="contact.html" class="btn btn-primary">Work with us <svg class="ico" viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></a>
     </div>
     <div class="split-media">
+      <h4 class="media-title">Augventa in numbers</h4>
       <div class="bar-row"><span class="label">Founded</span><div class="bar"><i style="width:100%"></i></div><span class="val">2021</span></div>
       <div class="bar-row"><span class="label">Team</span><div class="bar"><i style="width:62%"></i></div><span class="val">12</span></div>
       <div class="bar-row"><span class="label">Ventures</span><div class="bar"><i style="width:85%"></i></div><span class="val">45+</span></div>
       <div class="bar-row"><span class="label">Services</span><div class="bar"><i style="width:70%"></i></div><span class="val">10</span></div>
-      <div class="hero-card-foot"><span>Engagement renewal</span><b>94%</b></div>
+      <div class="media-foot"><span>Engagement renewal</span><b>94%</b></div>
     </div>
   </div>
 </section>
 
 <!-- ================= VALUES ================= -->
-<section class="section section-alt">
+<section class="sec sec-gray">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="sec-head reveal">
       <span class="eyebrow">What we stand for</span>
       <h2>Four things we won't compromise on</h2>
     </div>
     <div class="grid-4">
       <div class="card reveal">
-        <div class="icon">🔍</div>
+        <div class="svc-ico"><svg viewBox="0 0 24 24"><use href="#i-search"/></svg></div>
         <h3>Honest reporting</h3>
         <p>We flag the bad sprints and the underperforming campaigns early, not buried on slide 14.</p>
       </div>
       <div class="card reveal">
-        <div class="icon alt">💡</div>
+        <div class="svc-ico"><svg viewBox="0 0 24 24"><use href="#i-idea"/></svg></div>
         <h3>Plain language</h3>
         <p>No acronym soup. Everything we send is written so a non-technical founder can act on it.</p>
       </div>
       <div class="card reveal">
-        <div class="icon">⏱️</div>
+        <div class="svc-ico"><svg viewBox="0 0 24 24"><use href="#i-clock"/></svg></div>
         <h3>Fast replies</h3>
         <p>Messages answered within one working day, always. Production issues, much sooner.</p>
       </div>
       <div class="card reveal">
-        <div class="icon alt">🔓</div>
+        <div class="svc-ico"><svg viewBox="0 0 24 24"><use href="#i-unlock"/></svg></div>
         <h3>No lock-in</h3>
         <p>Code, cloud, ad accounts and brand files are yours. Leave whenever, and take a working system.</p>
       </div>
@@ -141,10 +239,68 @@
   </div>
 </section>
 
-<!-- ================= PROCESS ================= -->
-<section class="section" id="process">
+<!-- ================= INDUSTRIES ================= -->
+<section class="sec" id="industries">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Industries</span>
+      <h2>40+ industries served, <span class="orange">eight we know best</span></h2>
+      <p>We work anywhere the gap is people, process, pipeline or platform — but these are the categories where we already know the constraints before you explain them.</p>
+    </div>
+
+    <div class="grid-4">
+      <div class="card reveal">
+        <div class="svc-ico"><svg viewBox="0 0 24 24"><use href="#i-heart"/></svg></div>
+        <h3>Healthcare &amp; Clinics</h3>
+        <p>Patient acquisition, compliant messaging, booking platforms and clinic branding.</p>
+      </div>
+      <div class="card reveal">
+        <div class="svc-ico"><svg viewBox="0 0 24 24"><use href="#i-bed"/></svg></div>
+        <h3>Hospitality &amp; Hotels</h3>
+        <p>Direct-booking funnels, property branding and consistency across every touchpoint.</p>
+      </div>
+      <div class="card reveal">
+        <div class="svc-ico"><svg viewBox="0 0 24 24"><use href="#i-brand"/></svg></div>
+        <h3>Luxury &amp; Premium Retail</h3>
+        <p>Identity, restraint and art direction for brands that sell on perception, not features.</p>
+      </div>
+      <div class="card reveal">
+        <div class="svc-ico"><svg viewBox="0 0 24 24"><use href="#i-cloud"/></svg></div>
+        <h3>SaaS &amp; Technology</h3>
+        <p>Engineering capacity, cloud architecture and go-to-market for product teams.</p>
+      </div>
+      <div class="card reveal">
+        <div class="svc-ico"><svg viewBox="0 0 24 24"><use href="#i-wallet"/></svg></div>
+        <h3>Fintech &amp; Financial Services</h3>
+        <p>Secure data pipelines, automation of manual reconciliation, and regulated messaging.</p>
+      </div>
+      <div class="card reveal">
+        <div class="svc-ico"><svg viewBox="0 0 24 24"><use href="#i-truck"/></svg></div>
+        <h3>Logistics &amp; Supply Chain</h3>
+        <p>Operational automation, tracking platforms and integrations across carrier systems.</p>
+      </div>
+      <div class="card reveal">
+        <div class="svc-ico"><svg viewBox="0 0 24 24"><use href="#i-home"/></svg></div>
+        <h3>Real Estate</h3>
+        <p>Lead generation, listing platforms and paid campaigns measured on qualified viewings.</p>
+      </div>
+      <div class="card reveal">
+        <div class="svc-ico"><svg viewBox="0 0 24 24"><use href="#i-briefcase"/></svg></div>
+        <h3>Professional Services</h3>
+        <p>Positioning, partnerships and outbound for firms that sell expertise, not products.</p>
+      </div>
+    </div>
+
+    <div class="svc-more reveal">
+      <a href="contact.html" class="btn btn-outline">Don't see yours? Tell us about it <svg class="ico" viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROCESS ================= -->
+<section class="sec sec-gray" id="process">
+  <div class="wrap">
+    <div class="sec-head reveal">
       <span class="eyebrow">Our process</span>
       <h2>How an engagement actually runs</h2>
       <p>The same four stages whether you're engaging the tech practice, the non-tech practice, or both.</p>
@@ -176,36 +332,36 @@
 
 <!-- ================= TEAM =================
      ⚠️ Placeholder people — replace with your real team before launch. -->
-<section class="section section-alt">
+<section class="sec">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="sec-head reveal">
       <span class="eyebrow">The team</span>
       <h2>Who you'll actually be talking to</h2>
       <p>Small on purpose — you get senior people, not an account handler relaying messages.</p>
     </div>
     <div class="grid-4">
       <div class="card center reveal">
-        <div class="avatar" style="width:62px;height:62px;font-size:1.2rem;margin:0 auto 1rem;">AN</div>
+        <span class="av" style="width:64px;height:64px;border-radius:50%;display:grid;place-items:center;margin:0 auto 1rem;color:#fff;font-weight:600;background:linear-gradient(135deg,var(--brand-light),var(--brand-dark));">AN</span>
         <h3>Ayesha N.</h3>
-        <p style="color:var(--brand);font-weight:600;font-size:.9rem;">Founder &amp; Managing Partner</p>
+        <p style="color:var(--brand);font-weight:500;font-size:.78rem;margin-bottom:.5rem;">Founder &amp; Managing Partner</p>
         <p>Sets direction across both practices and scopes every new engagement personally.</p>
       </div>
       <div class="card center reveal">
-        <div class="avatar" style="width:62px;height:62px;font-size:1.2rem;margin:0 auto 1rem;">AK</div>
+        <span class="av" style="width:64px;height:64px;border-radius:50%;display:grid;place-items:center;margin:0 auto 1rem;color:#fff;font-weight:600;background:linear-gradient(135deg,#334155,#0b1526);">AK</span>
         <h3>Ali K.</h3>
-        <p style="color:var(--brand);font-weight:600;font-size:.9rem;">Head of Talent &amp; Delivery</p>
+        <p style="color:var(--brand);font-weight:500;font-size:.78rem;margin-bottom:.5rem;">Head of Talent &amp; Delivery</p>
         <p>Runs the engineering bench — vetting, matching and the quality of every placement.</p>
       </div>
       <div class="card center reveal">
-        <div class="avatar" style="width:62px;height:62px;font-size:1.2rem;margin:0 auto 1rem;">HM</div>
+        <span class="av" style="width:64px;height:64px;border-radius:50%;display:grid;place-items:center;margin:0 auto 1rem;color:#fff;font-weight:600;background:linear-gradient(135deg,var(--brand-light),var(--brand-dark));">HM</span>
         <h3>Hira M.</h3>
-        <p style="color:var(--brand);font-weight:600;font-size:.9rem;">Brand &amp; Creative Lead</p>
+        <p style="color:var(--brand);font-weight:500;font-size:.78rem;margin-bottom:.5rem;">Brand &amp; Creative Lead</p>
         <p>Leads branding across luxury, healthcare and hospitality, plus all campaign creative.</p>
       </div>
       <div class="card center reveal">
-        <div class="avatar" style="width:62px;height:62px;font-size:1.2rem;margin:0 auto 1rem;">BT</div>
+        <span class="av" style="width:64px;height:64px;border-radius:50%;display:grid;place-items:center;margin:0 auto 1rem;color:#fff;font-weight:600;background:linear-gradient(135deg,#334155,#0b1526);">BT</span>
         <h3>Bilal T.</h3>
-        <p style="color:var(--brand);font-weight:600;font-size:.9rem;">AI, Cloud &amp; Search</p>
+        <p style="color:var(--brand);font-weight:500;font-size:.78rem;margin-bottom:.5rem;">AI, Cloud &amp; Search</p>
         <p>Automation builds, GCP architecture, and the GEO/AEO/SEO programme.</p>
       </div>
     </div>
@@ -213,46 +369,46 @@
 </section>
 
 <!-- ================= CTA ================= -->
-<section class="section">
+<section class="sec" style="padding-top:0">
   <div class="wrap">
-    <div class="cta-band reveal">
-      <h2>Think we'd be a good fit?</h2>
-      <p>One call is usually enough to know. Book 30 minutes and we'll tell you honestly whether we can help — and if not, who could.</p>
-      <div class="cta-actions">
-        <a href="contact.html" class="btn btn-light">Book a consultation</a>
-        <a href="index.html#services" class="btn btn-outline-light">Browse services</a>
+    <div class="cta-band stack reveal">
+      <img src="assets/cta-art.svg" alt="" class="cta-art">
+      <div class="cta-copy">
+        <h2>Think we'd be a good fit?</h2>
+        <p>One call is usually enough to know. Book 30 minutes and we'll tell you honestly whether we can help — and if not, who could.</p>
+        <div class="cta-actions">
+          <a href="contact.html" class="btn btn-primary">Book a Consultation <svg class="ico" viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></a>
+          <a href="index.html#services" class="btn btn-ghost-dark">Browse services</a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ================= FOOTER ================= -->
 <footer class="footer">
   <div class="wrap">
-    <div class="footer-grid">
+    <div class="foot-grid">
       <div>
-        <a href="index.html" class="logo"><img src="assets/logo.svg" alt="" class="logo-mark"> Augventa</a>
-        <span class="logo-tag">Augmenting Ventures</span>
-        <p>A technology and growth partner: engineering talent, AI automation and cloud on one side; brand, pipeline and platforms on the other.</p>
+        <a href="index.html" class="logo"><img src="assets/logo.svg" alt="" class="logo-mark" width="34" height="34"> Augventa</a>
+        <p>We augment businesses with the right people, technology and strategies to build, scale and accelerate growth.</p>
         <div class="socials">
-          <a href="#" aria-label="LinkedIn">In</a>
-          <a href="#" aria-label="Facebook">Fb</a>
-          <a href="#" aria-label="Instagram">Ig</a>
-          <a href="#" aria-label="X">X</a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><use href="#i-linkedin"/></svg></a>
+          <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><use href="#i-x"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><use href="#i-facebook"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><use href="#i-instagram"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><use href="#i-youtube"/></svg></a>
         </div>
       </div>
+
       <div>
-        <h4>Tech</h4>
+        <h4>Services</h4>
         <ul>
           <li><a href="tech.html#staff-augmentation">IT Staff Augmentation</a></li>
           <li><a href="tech.html#ai-automation">AI Automation</a></li>
           <li><a href="tech.html#gcp">GCP Integration</a></li>
           <li><a href="tech.html#revenue">Revenue Services</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Non-Tech</h4>
-        <ul>
-          <li><a href="non-tech.html#partnerships">B2B Partnerships</a></li>
+          <li><a href="non-tech.html#partnerships">B2B Partnerships / Lead Gen</a></li>
           <li><a href="non-tech.html#branding">Branding</a></li>
           <li><a href="non-tech.html#paid-ads">Paid Ads</a></li>
           <li><a href="non-tech.html#web">Website Development</a></li>
@@ -260,17 +416,45 @@
           <li><a href="non-tech.html#app">App Development</a></li>
         </ul>
       </div>
+
       <div>
-        <h4>Get in touch</h4>
+        <h4>Company</h4>
         <ul>
-          <li><a href="about.html">About us</a></li>
-          <li><a href="mailto:sidrah@augventa.com">sidrah@augventa.com</a></li>
-          <li><a href="tel:+923324322045">+92 332 4322045</a></li>
-          <li>Mon–Fri, 10 AM – 7 PM</li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="index.html#case-studies">Case Studies</a></li>
+          <li><a href="about.html#industries">Industries</a></li>
+          <li><a href="contact.html">Careers</a></li>
+          <li><a href="about.html#process">How We Work</a></li>
+          <li><a href="index.html#faqs">Resources</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
         </ul>
       </div>
+
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="index.html#faqs">FAQs</a></li>
+          <li><a href="index.html#case-studies">Case Studies</a></li>
+          <li><a href="tech.html">Tech Practice</a></li>
+          <li><a href="non-tech.html">Non-Tech Practice</a></li>
+          <li><a href="about.html#process">Our Process</a></li>
+          <li><a href="contact.html">Talk to an Expert</a></li>
+        </ul>
+      </div>
+
+      <div class="news">
+        <h4>Stay Updated</h4>
+        <p>Subscribe to our newsletter for latest insights and updates.</p>
+        <form class="news-form" id="newsForm" novalidate>
+          <label for="newsEmail" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Email address</label>
+          <input type="email" id="newsEmail" name="email" placeholder="Enter your email" autocomplete="email">
+          <button type="submit" aria-label="Subscribe"><svg viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></button>
+        </form>
+        <p class="news-msg" id="newsMsg" role="status"></p>
+      </div>
     </div>
-    <div class="footer-bottom">
+
+    <div class="foot-bottom">
       <span>&copy; <span class="year">2026</span> Augventa. All rights reserved.</span>
       <span>Augmenting Ventures.</span>
     </div>

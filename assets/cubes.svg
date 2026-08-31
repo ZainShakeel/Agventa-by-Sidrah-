@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 200" role="presentation" aria-hidden="true">
+  <defs>
+    <symbol id="cO" viewBox="0 0 40 40">
+      <polygon points="20,0 40,10 20,20 0,10"   fill="#ffa04d"/>
+      <polygon points="0,10 20,20 20,40 0,30"   fill="#e85f00"/>
+      <polygon points="40,10 40,30 20,40 20,20" fill="#ff6b00"/>
+    </symbol>
+    <symbol id="cW" viewBox="0 0 40 40">
+      <polygon points="20,0 40,10 20,20 0,10"   fill="#ffffff"/>
+      <polygon points="0,10 20,20 20,40 0,30"   fill="#dfe4ec"/>
+      <polygon points="40,10 40,30 20,40 20,20" fill="#eef1f6"/>
+    </symbol>
+    <filter id="cSh" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#0f172a" flood-opacity=".12"/>
+    </filter>
+  </defs>
+  <g filter="url(#cSh)">
+    <use href="#cO" x="58"  y="26"  width="94" height="94"/>
+    <use href="#cW" x="10"  y="86"  width="70" height="70"/>
+    <use href="#cO" x="128" y="104" width="56" height="56"/>
+    <use href="#cW" x="70"  y="126" width="48" height="48"/>
+  </g>
+  <g fill="#ff6b00">
+    <rect x="182" y="60" width="10" height="10" rx="2" opacity=".7"/>
+    <rect x="200" y="42" width="7"  height="7"  rx="1.5" opacity=".45"/>
+  </g>
+</svg>

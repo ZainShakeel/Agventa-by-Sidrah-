@@ -1,36 +1,71 @@
 /* ============================================================
-   Augventa — Site scripts
-   1. Mobile navigation toggle
-   2. Reveal-on-scroll animation
-   3. FAQ accordion
-   4. Form validation (shared by the contact page and the modal)
-   5. Service CTA modal
-   6. Pre-select a service on the contact page from ?service=
-   7. Footer year
+   AUGVENTA — Site scripts
+    1. Sticky-header shadow
+    2. Mobile navigation + dropdowns
+    3. Reveal-on-scroll
+    4. Tech / Non-Tech service toggle
+    5. Animated stat counters
+    6. Rotating carousels (stats bar, case studies, testimonials)
+    7. FAQ accordion
+    8. Form validation + submission (contact page and modal)
+    9. Service CTA modal
+   10. Pre-select a service on the contact page from ?service=
+   11. Newsletter sign-up
+   12. Footer year
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  /* ---------- 1. Mobile nav ---------- */
-  var burger = document.querySelector('.burger');
-  var links  = document.querySelector('.nav-links');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- 1. Sticky-header shadow ---------- */
+  var header = document.getElementById('siteHeader');
+  if (header) {
+    var onScroll = function () {
+      header.classList.toggle('stuck', window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  /* ---------- 2. Mobile navigation + dropdowns ----------
+     On desktop the dropdowns open on hover (CSS only). Below 980px the
+     parent link becomes an accordion toggle instead of a link. */
+  var burger = document.getElementById('burger');
+  var links  = document.getElementById('navLinks');
+
   if (burger && links) {
     burger.addEventListener('click', function () {
-      links.classList.toggle('open');
-      burger.classList.toggle('open');
-      burger.setAttribute('aria-expanded', links.classList.contains('open'));
+      var open = links.classList.toggle('open');
+      burger.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', String(open));
     });
+
     links.querySelectorAll('a').forEach(function (a) {
       a.addEventListener('click', function () {
+        // Don't close the menu when the tap only opened a sub-menu
+        if (a.parentElement.classList.contains('has-drop') && window.innerWidth <= 980) return;
         links.classList.remove('open');
         burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
       });
     });
   }
 
-  /* ---------- 2. Reveal on scroll ---------- */
+  document.querySelectorAll('.has-drop > a').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      if (window.innerWidth > 980) return;      // desktop keeps hover behaviour
+      e.preventDefault();
+      var li = a.parentElement;
+      var wasOpen = li.classList.contains('open');
+      document.querySelectorAll('.has-drop.open').forEach(function (o) { o.classList.remove('open'); });
+      li.classList.toggle('open', !wasOpen);
+    });
+  });
+
+  /* ---------- 3. Reveal on scroll ---------- */
   var items = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
+  if ('IntersectionObserver' in window && !reduceMotion) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) {
@@ -38,20 +73,150 @@ document.addEventListener('DOMContentLoaded', function () {
           io.unobserve(e.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     items.forEach(function (el) { io.observe(el); });
   } else {
     items.forEach(function (el) { el.classList.add('visible'); });
   }
 
-  /* ---------- 3. FAQ accordion ---------- */
+  /* ---------- 4. Tech / Non-Tech service toggle ----------
+     Both rows are shown by default (as in the approved design). Picking a
+     track narrows the grid to just that side; picking the same track again
+     brings both rows back. */
+  var toggleBtns = document.querySelectorAll('.toggle [data-track]');
+  var trackTech  = document.getElementById('trackTech');
+  var trackNon   = document.getElementById('trackNonTech');
+  var activeTrack = null;
+
+  if (toggleBtns.length && trackTech && trackNon) {
+    toggleBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var want = btn.getAttribute('data-track');
+        activeTrack = (activeTrack === want) ? null : want;
+
+        toggleBtns.forEach(function (b) {
+          var on = b.getAttribute('data-track') === activeTrack || (!activeTrack && b === toggleBtns[0]);
+          b.classList.toggle('on', on);
+          b.setAttribute('aria-selected', String(on));
+        });
+
+        trackTech.classList.toggle('hide', activeTrack === 'nontech');
+        trackNon.classList.toggle('hide',  activeTrack === 'tech');
+      });
+    });
+  }
+
+  /* ---------- 5. Animated stat counters ---------- */
+  var counters = document.querySelectorAll('[data-count]');
+  if (counters.length) {
+    var runCount = function (el) {
+      var target = parseFloat(el.getAttribute('data-count'));
+      var suffix = el.getAttribute('data-suffix') || '';
+      if (reduceMotion || isNaN(target)) { el.textContent = target + suffix; return; }
+
+      var start = null, dur = 1400;
+      var tick = function (ts) {
+        if (start === null) start = ts;
+        var p = Math.min((ts - start) / dur, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * eased) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      el.textContent = '0' + suffix;
+      requestAnimationFrame(tick);
+    };
+
+    if ('IntersectionObserver' in window) {
+      var co = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { runCount(e.target); co.unobserve(e.target); }
+        });
+      }, { threshold: 0.5 });
+      counters.forEach(function (el) { co.observe(el); });
+    }
+  }
+
+  /* ---------- 6. Rotating carousels ----------
+     One small helper drives the stats bar, the case studies and the
+     testimonials. "Next" moves the first card to the end of the row, so the
+     controls stay meaningful at every screen width — including desktop,
+     where every card is already visible. */
+  function makeRotator(track, opts) {
+    if (!track) return null;
+    opts = opts || {};
+    var count = track.children.length;
+    var index = 0;
+
+    var paint = function () {
+      if (!opts.dots) return;
+      opts.dots.forEach(function (d, i) { d.classList.toggle('on', i === index); });
+    };
+
+    var step = function (dir) {
+      if (count < 2) return;
+      if (dir > 0) track.appendChild(track.firstElementChild);
+      else track.insertBefore(track.lastElementChild, track.firstElementChild);
+
+      index = (index + dir + count) % count;
+      paint();
+
+      if (!reduceMotion) {
+        track.style.transition = 'none';
+        track.style.opacity = '.35';
+        requestAnimationFrame(function () {
+          track.style.transition = 'opacity .35s ease';
+          track.style.opacity = '1';
+        });
+      }
+    };
+
+    var goTo = function (target) {
+      var diff = (target - index + count) % count;
+      for (var i = 0; i < diff; i++) step(1);
+    };
+
+    if (opts.prev) opts.prev.addEventListener('click', function () { step(-1); });
+    if (opts.next) opts.next.addEventListener('click', function () { step(1); });
+    if (opts.dots) {
+      opts.dots.forEach(function (d, i) {
+        d.addEventListener('click', function () { goTo(i); });
+      });
+    }
+    paint();
+    return { step: step, goTo: goTo };
+  }
+
+  var dotsFor = function (id) {
+    var group = document.querySelector('[data-dots-for="' + id + '"]');
+    return group ? Array.prototype.slice.call(group.querySelectorAll('.dot')) : null;
+  };
+
+  // Stats bar
+  var statsBar = document.getElementById('statsBar');
+  makeRotator(document.getElementById('statsTrack'), {
+    prev: statsBar ? statsBar.querySelector('.arw.prev') : null,
+    next: statsBar ? statsBar.querySelector('.arw.next') : null
+  });
+
+  // Case studies
+  makeRotator(document.getElementById('casesGrid'), { dots: dotsFor('casesGrid') });
+
+  // Testimonials
+  makeRotator(document.getElementById('tstCards'), {
+    prev: document.querySelector('[data-tst="prev"]'),
+    next: document.querySelector('[data-tst="next"]'),
+    dots: dotsFor('tstCards')
+  });
+
+  /* ---------- 7. FAQ accordion ---------- */
   document.querySelectorAll('.faq-q').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var item = btn.parentElement;
-      var body = item.querySelector('.faq-a');
+      var item   = btn.parentElement;
+      var body   = item.querySelector('.faq-a');
       var isOpen = item.classList.contains('open');
 
-      document.querySelectorAll('.faq-item').forEach(function (i) {
+      var scope = item.closest('.faq-list, .faq') || document;
+      scope.querySelectorAll('.faq-item').forEach(function (i) {
         i.classList.remove('open');
         i.querySelector('.faq-a').style.maxHeight = null;
         i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
@@ -65,21 +230,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  /* ---------- 4. Form validation + submission ----------
+  /* ---------- 8. Form validation + submission ----------
      Shared by the full contact form and the popup enquiry form.
 
      Submissions POST to FormSubmit, which emails them to the address in the
-     form's `action` and cc's the `_cc` hidden field. To switch provider, change
-     the `action` attribute in the HTML — nothing here needs editing.
+     form's `action` and cc's the `_cc` hidden field. To switch provider,
+     change the `action` attribute in the HTML — nothing here needs editing.
 
-     NOTE: FormSubmit requires a one-time activation. The very first submission
-     sends a confirmation link to the target address; until someone clicks it,
-     nothing is delivered. */
+     NOTE: FormSubmit requires a one-time activation. The very first
+     submission sends a confirmation link to the target address; until
+     someone clicks it, nothing is delivered. */
   function wireForm(form, msgEl) {
     if (!form) return;
 
     var btn        = form.querySelector('button[type=submit]');
-    var btnDefault = btn ? btn.textContent : '';
+    var btnDefault = btn ? btn.innerHTML : '';
 
     var mark = function (input, bad) {
       var field = input.closest('.field');
@@ -115,14 +280,12 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       if (!form.action || form.action.indexOf('formsubmit') === -1) {
-        // No endpoint configured — fall back to a normal submit.
-        form.submit();
+        form.submit();   // no endpoint configured — fall back to a normal submit
         return;
       }
 
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
 
-      // FormSubmit's AJAX endpoint keeps the user on the page.
       fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
         method: 'POST',
         headers: { 'Accept': 'application/json' },
@@ -140,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function () {
         say('⚠️ Sorry, that didn’t send. Please email us directly at sidrah@augventa.com or call +92 332 4322045.', true);
       })
       .finally(function () {
-        if (btn) { btn.disabled = false; btn.textContent = btnDefault; }
+        if (btn) { btn.disabled = false; btn.innerHTML = btnDefault; }
       });
     });
 
@@ -152,19 +315,19 @@ document.addEventListener('DOMContentLoaded', function () {
   wireForm(document.getElementById('contactForm'), document.getElementById('formSuccess'));
   wireForm(document.getElementById('modalForm'),   document.getElementById('modalSuccess'));
 
-  /* ---------- 5. Service CTA modal ----------
-     Each service card links to contact.html?service=xxx. If JS is available we
-     intercept that and open the popup instead, so the CTA still works with
-     JS disabled rather than being a dead button. */
+  /* ---------- 9. Service CTA modal ----------
+     Each service card links to contact.html?service=xxx. If JS is available
+     we intercept that and open the popup instead, so the CTA still works
+     with JS disabled rather than being a dead button. */
   var modal = document.getElementById('ctaModal');
   if (modal) {
-    var svcField   = document.getElementById('modalService');
-    var svcLabel   = document.getElementById('modalServiceLabel');
-    var modalForm  = document.getElementById('modalForm');
-    var fullLink   = document.getElementById('modalFullLink');
-    var lastFocus  = null;
+    var svcField  = document.getElementById('modalService');
+    var svcLabel  = document.getElementById('modalServiceLabel');
+    var modalForm = document.getElementById('modalForm');
+    var fullLink  = document.getElementById('modalFullLink');
+    var lastFocus = null;
 
-    function openModal(value, label) {
+    var openModal = function (value, label) {
       lastFocus = document.activeElement;
       if (svcField) svcField.value = value || '';
       if (svcLabel) svcLabel.textContent = label || 'Enquiry';
@@ -175,9 +338,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
       var firstInput = modal.querySelector('input:not([type=hidden]), textarea');
       if (firstInput) firstInput.focus();
-    }
+    };
 
-    function closeModal() {
+    var closeModal = function () {
       modal.classList.remove('open');
       document.body.classList.remove('modal-open');
       if (modalForm) {
@@ -186,7 +349,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       }
       if (lastFocus) lastFocus.focus();
-    }
+    };
 
     document.querySelectorAll('[data-cta]').forEach(function (el) {
       el.addEventListener('click', function (e) {
@@ -214,7 +377,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ---------- 6. Pre-select a service on the contact page ----------
+  /* ---------- 10. Pre-select a service on the contact page ----------
      So contact.html?service=gcp lands with GCP Integration already chosen. */
   var serviceSelect = document.getElementById('service');
   if (serviceSelect && window.location.search) {
@@ -228,7 +391,40 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  /* ---------- 7. Footer year ---------- */
+  /* ---------- 11. Newsletter sign-up ----------
+     Posts to the same FormSubmit inbox as the contact form. */
+  var newsForm = document.getElementById('newsForm');
+  if (newsForm) {
+    newsForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var input = document.getElementById('newsEmail');
+      var msg   = document.getElementById('newsMsg');
+      var val   = (input.value || '').trim();
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val)) {
+        msg.textContent = 'Please enter a valid email address.';
+        input.focus();
+        return;
+      }
+
+      msg.textContent = 'Subscribing…';
+      fetch('https://formsubmit.co/ajax/shakeelzain04@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: 'New newsletter subscriber — Augventa',
+          _cc: 'sidrah@augventa.com',
+          _captcha: 'false',
+          email: val
+        })
+      })
+      .then(function (r) { if (!r.ok) throw new Error(); return r.json(); })
+      .then(function () { msg.textContent = '✅ Subscribed. Thanks!'; newsForm.reset(); })
+      .catch(function () { msg.textContent = 'Could not subscribe — email us at sidrah@augventa.com.'; });
+    });
+  }
+
+  /* ---------- 12. Footer year ---------- */
   document.querySelectorAll('.year').forEach(function (el) {
     el.textContent = new Date().getFullYear();
   });

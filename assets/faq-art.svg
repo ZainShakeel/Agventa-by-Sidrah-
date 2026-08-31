@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 250" role="presentation" aria-hidden="true">
+  <defs>
+    <symbol id="fO" viewBox="0 0 40 40">
+      <polygon points="20,0 40,10 20,20 0,10"   fill="#ffa04d"/>
+      <polygon points="0,10 20,20 20,40 0,30"   fill="#e85f00"/>
+      <polygon points="40,10 40,30 20,40 20,20" fill="#ff6b00"/>
+    </symbol>
+    <symbol id="fW" viewBox="0 0 40 40">
+      <polygon points="20,0 40,10 20,20 0,10"   fill="#ffffff"/>
+      <polygon points="0,10 20,20 20,40 0,30"   fill="#dfe4ec"/>
+      <polygon points="40,10 40,30 20,40 20,20" fill="#eef1f6"/>
+    </symbol>
+    <filter id="fSh" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="9" stdDeviation="10" flood-color="#0f172a" flood-opacity=".14"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#fSh)">
+    <use href="#fO" x="24"  y="4"   width="76" height="76"/>
+    <use href="#fW" x="4"   y="56"  width="58" height="58"/>
+    <use href="#fO" x="70"  y="66"  width="42" height="42"/>
+  </g>
+
+  <!-- orange question bubble -->
+  <g filter="url(#fSh)">
+    <path d="M96 108h74a14 14 0 0 1 14 14v52a14 14 0 0 1-14 14h-46l-20 20 4-20h-12a14 14 0 0 1-14-14v-52a14 14 0 0 1 14-14z" fill="#ff6b00"/>
+    <text x="133" y="164" font-family="Poppins, Segoe UI, Arial, sans-serif" font-size="46" font-weight="700" fill="#fff" text-anchor="middle">?</text>
+  </g>
+
+  <!-- white bubble with typing dots -->
+  <g filter="url(#fSh)">
+    <path d="M196 130h74a14 14 0 0 1 14 14v40a14 14 0 0 1-14 14h-14l-14 18-2-18h-44a14 14 0 0 1-14-14v-40a14 14 0 0 1 14-14z" fill="#fff"/>
+    <g fill="#ff6b00">
+      <circle cx="216" cy="164" r="7"/>
+      <circle cx="238" cy="164" r="7" opacity=".72"/>
+      <circle cx="260" cy="164" r="7" opacity=".45"/>
+    </g>
+  </g>
+</svg>
