@@ -7,8 +7,25 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
 
-# Assets are cached for an hour and then revalidated. Deliberately modest:
-# the filenames aren't content-hashed, so a long cache would leave visitors
-# on a stale stylesheet after you push a change.
+# Assets are cached for an hour and then revalidated.
+#
+# ⚠️ IMPORTANT — the filenames are not content-hashed, and Cloudflare's edge
+# cache has been observed holding an old /assets/style.css for hours after a
+# deploy, which serves visitors a broken, half-styled page.
+#
+# So style.css and script.js are linked with a version query string:
+#
+#     <link rel="stylesheet" href="assets/style.css?v=20260831">
+#     <script src="assets/script.js?v=20260831"></script>
+#
+# A different query string is a different cache key, so a new version is
+# fetched immediately instead of waiting for a cache to expire.
+#
+# WHENEVER YOU EDIT style.css OR script.js, bump that date in all five HTML
+# files (index, tech, non-tech, about, contact) in the same commit:
+#
+#     sed -i 's/?v=20260831/?v=YYYYMMDD/g' *.html
+#
+# Skip it and your change may not reach visitors for hours.
 /assets/*
   Cache-Control: public, max-age=3600, must-revalidate
