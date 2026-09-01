@@ -54,7 +54,7 @@
    2. RESET / BASE
    ------------------------------------------------------------ */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 112px; }
+html { scroll-behavior: smooth; scroll-padding-top: 98px; }
 body {
   font-family: var(--font);
   font-size: 15px;
@@ -170,12 +170,25 @@ strong { color: var(--ink-2); font-weight: 600; }
 }
 .header.stuck { border-color: var(--line); box-shadow: 0 6px 22px -18px rgba(15,23,42,.5); }
 
-/* Tall enough to give the stacked lockup room to be legible. */
-.nav { display: flex; align-items: center; justify-content: space-between; height: 100px; gap: 1.5rem; }
+.nav { display: flex; align-items: center; justify-content: space-between; height: 86px; gap: 1.5rem; }
 
-.logo { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: 1.32rem; color: var(--ink); letter-spacing: -.02em; }
-/* The full lockup is landscape (620x408), so drive it off height. */
-.logo-mark { height: 62px; width: auto; flex-shrink: 0; }
+/* Horizontal lockup: mark, then wordmark with the tagline under it.
+   The tagline is live text rather than part of the artwork — baked into
+   the image it shrank with the logo and became unreadable. */
+.logo { display: flex; align-items: center; gap: .6rem; }
+.logo-mark { height: 44px; width: auto; flex-shrink: 0; }
+.logo-lockup { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.logo-word { height: 18px; width: auto; display: block; }
+.logo-tag {
+  display: flex; align-items: center; gap: 7px;
+  font-size: .58rem; line-height: 1;
+  letter-spacing: .19em; text-transform: uppercase;
+  font-weight: 500; color: var(--ink-2); white-space: nowrap;
+}
+.logo-tag::before, .logo-tag::after {
+  content: ''; flex-shrink: 0;
+  width: 15px; height: 1.5px; border-radius: 1px; background: var(--brand);
+}
 
 .nav-links { display: flex; align-items: center; gap: 1.9rem; }
 .nav-links > li { position: relative; }
@@ -496,6 +509,7 @@ strong { color: var(--ink-2); font-weight: 600; }
   padding: 3.6rem 0 0;
 }
 .footer .logo { color: #fff; margin-bottom: 1rem; }
+.footer .logo-tag { color: rgba(255,255,255,.72); }
 .foot-grid { display: grid; grid-template-columns: 1.5fr .9fr .8fr .9fr 1.25fr; gap: 2rem; }
 .footer h4 { color: #fff; font-size: .88rem; font-weight: 600; margin-bottom: 1.1rem; }
 .footer p { font-size: .78rem; line-height: 1.75; max-width: 30ch; }
@@ -790,15 +804,18 @@ body.modal-open { overflow: hidden; }
 }
 
 @media (max-width: 980px) {
-  .nav { height: 88px; }
-  .logo-mark { height: 52px; }
+  .nav { height: 78px; }
+  .logo-mark { height: 38px; }
+  .logo-word { height: 15px; }
+  .logo-tag { font-size: .52rem; letter-spacing: .16em; gap: 5px; }
+  .logo-tag::before, .logo-tag::after { width: 11px; }
   .burger { display: block; }
   .nav-links {
-    position: absolute; top: 88px; left: 0; right: 0;
+    position: absolute; top: 78px; left: 0; right: 0;
     background: #fff; border-bottom: 1px solid var(--line);
     flex-direction: column; align-items: stretch; gap: 0;
     padding: .5rem 1.25rem 1.4rem;
-    max-height: calc(100vh - 88px); overflow-y: auto;
+    max-height: calc(100vh - 78px); overflow-y: auto;
     box-shadow: var(--sh);
     display: none;
   }
