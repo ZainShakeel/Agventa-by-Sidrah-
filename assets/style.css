@@ -173,7 +173,8 @@ strong { color: var(--ink-2); font-weight: 600; }
 .nav { display: flex; align-items: center; justify-content: space-between; height: 78px; gap: 1.5rem; }
 
 .logo { display: flex; align-items: center; gap: .5rem; font-weight: 700; font-size: 1.32rem; color: var(--ink); letter-spacing: -.02em; }
-.logo-mark { width: 38px; height: 38px; flex-shrink: 0; }
+/* The mark is the wide "A" lockup (320x227), so drive it off height. */
+.logo-mark { height: 34px; width: auto; flex-shrink: 0; }
 
 .nav-links { display: flex; align-items: center; gap: 1.9rem; }
 .nav-links > li { position: relative; }
